@@ -55,7 +55,7 @@ int worldMap[mapWidth][mapHeight]=
 };
 
  /* This function runs once at startup. */
- SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
+ SDL_AppResult SDL_AppInit(void)
  {
      SDL_SetAppMetadata("Example Renderer Points", "1.0", "com.example.renderer-points");
  
@@ -75,7 +75,7 @@ int worldMap[mapWidth][mapHeight]=
  }
  
  /* This function runs when a new event (mouse input, keypresses, etc) occurs. */
- SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
+ SDL_AppResult SDL_AppEvent(SDL_Event *event)
  {
      if (event->type == SDL_EVENT_QUIT) {
          return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
@@ -88,7 +88,7 @@ int worldMap[mapWidth][mapHeight]=
     TODO:
     1. Drawing logic for Map and Player coord.
  */
- SDL_AppResult SDL_AppIterate(void *appstate)
+ SDL_AppResult SDL_AppIterate(void)
  {
      const Uint64 now = SDL_GetTicks();
      const float deltaTime = ((float) (now - last_time)) / 1000.0f;   /* seconds since last iteration */
@@ -102,7 +102,7 @@ int worldMap[mapWidth][mapHeight]=
  }
  
  /* This function runs once at shutdown. */
- void SDL_AppQuit(void *appstate, SDL_AppResult result)
+ void SDL_AppQuit()
  {
      /* SDL will clean up the window/renderer for us. */
  }
