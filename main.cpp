@@ -57,7 +57,7 @@ int worldMap[mapWidth][mapHeight]=
  /* This function runs once at startup. */
  SDL_AppResult SDL_AppInit(void)
  {
-     SDL_SetAppMetadata("Example Renderer Points", "1.0", "com.example.renderer-points");
+     SDL_SetAppMetadata("Raycasting Engine", "M1", "com.suheb.raycastrenderer");
  
      if (!SDL_Init(SDL_INIT_VIDEO)) {
          SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
