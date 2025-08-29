@@ -26,6 +26,9 @@
     and to the right. This isn't how geometry works, but this is pretty
     standard in 2D graphics. */
 
+
+//map and player coords taken from https://lodev.org/cgtutor/raycasting.html
+
 int worldMap[mapWidth][mapHeight]=
 {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -54,10 +57,14 @@ int worldMap[mapWidth][mapHeight]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
+//create rectangles for background color
+SDL_FRect firstbgRect = {0,0,WINDOW_WIDTH,WINDOW_HEIGHT/2};
+SDL_FRect secondbgRect = {0,WINDOW_HEIGHT/2,WINDOW_WIDTH,WINDOW_HEIGHT/2};
+
  /* This function runs once at startup. */
- SDL_AppResult SDL_AppInit(void)
+ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
  {
-     SDL_SetAppMetadata("Raycasting Engine", "M1", "com.suheb.raycastrenderer");
+     SDL_SetAppMetadata("Example Renderer Points", "1.0", "com.example.renderer-points");
  
      if (!SDL_Init(SDL_INIT_VIDEO)) {
          SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
@@ -75,7 +82,7 @@ int worldMap[mapWidth][mapHeight]=
  }
  
  /* This function runs when a new event (mouse input, keypresses, etc) occurs. */
- SDL_AppResult SDL_AppEvent(SDL_Event *event)
+ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
  {
      if (event->type == SDL_EVENT_QUIT) {
          return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
@@ -87,14 +94,24 @@ int worldMap[mapWidth][mapHeight]=
  /*
     TODO:
     1. Drawing logic for Map and Player coord.
+    First draw bg color top and bottom, then draw all walls
  */
- SDL_AppResult SDL_AppIterate(void)
+ SDL_AppResult SDL_AppIterate(void *appstate)
  {
      const Uint64 now = SDL_GetTicks();
      const float deltaTime = ((float) (now - last_time)) / 1000.0f;   /* seconds since last iteration */
 
      /* You can also draw single points with SDL_RenderPoint(), but it's
         cheaper (sometimes significantly so) to do them all at once. */
+
+     // first fill bg rects
+     SDL_SetRenderDrawColor(renderer, 192,192,192, SDL_ALPHA_OPAQUE);
+     SDL_RenderFillRect(renderer, &firstbgRect);
+     
+     SDL_SetRenderDrawColor(renderer, 105, 105, 105, SDL_ALPHA_OPAQUE);
+     SDL_RenderFillRect(renderer, &secondbgRect);
+
+
  
      SDL_RenderPresent(renderer);  /* put it all on the screen! */
  
@@ -102,7 +119,7 @@ int worldMap[mapWidth][mapHeight]=
  }
  
  /* This function runs once at shutdown. */
- void SDL_AppQuit()
+ void SDL_AppQuit(void *appstate, SDL_AppResult result)
  {
      /* SDL will clean up the window/renderer for us. */
  }
