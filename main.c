@@ -110,8 +110,8 @@ void drawRays(float playerX, float playerY, float rays[], int numrays)
 
     // create a rotation vector using players current angle
     // calculate many rays using the ray direction at different offsets
-    float planeX = -p.deltaY * 0.9f; // 0.66 ~ 66 degree FOV using rotation matrix
-    float planeY =  p.deltaX * 0.9f;
+    float planeX = -p.deltaY * 0.6f; // 0.60 ~ 60 degree FOV using rotation matrix
+    float planeY =  p.deltaX * 0.6f;
 
     for (int i = 0; i < numrays; i++)
         {
@@ -229,12 +229,12 @@ void drawMiniMap()
 
          switch (worldMap[row][col])
          {
-               case 1: SDL_SetRenderDrawColor(renderer, 255,255,255, SDL_ALPHA_OPAQUE); break;
+               case 1: SDL_SetRenderDrawColor(renderer, 255,0,0, SDL_ALPHA_OPAQUE); break;
                case 2: SDL_SetRenderDrawColor(renderer, 255,51,153, SDL_ALPHA_OPAQUE); break;
                case 3: SDL_SetRenderDrawColor(renderer, 0,255,0, SDL_ALPHA_OPAQUE); break;
                case 4: SDL_SetRenderDrawColor(renderer, 255,128,0, SDL_ALPHA_OPAQUE); break;
                case 5: SDL_SetRenderDrawColor(renderer, 128,255,0, SDL_ALPHA_OPAQUE); break;
-               default: SDL_SetRenderDrawColor(renderer, 0,0,0, SDL_ALPHA_OPAQUE); break;
+               default: SDL_SetRenderDrawColor(renderer, 255,255,255, SDL_ALPHA_OPAQUE); break;
          }
 
 
