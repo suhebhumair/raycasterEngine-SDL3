@@ -30,3 +30,13 @@ A Wolfenstein-inspired raycaster engine using **SDL3** for graphics and renderin
         │   └───SDL3
         └───pkgconfig
 ```
+
+## Compilation Instructions
+
+include makefile in the same directory as c file along with SDL3 dll and libraries structured as above and compile using this
+
+```
+all:
+	g++ -Wextra -Wpedantic -I src/include -L src/lib -o main main.c -lmingw32 -lSDL3
+
+```
