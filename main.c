@@ -202,7 +202,7 @@ void drawRays(float playerX, float playerY, float rays[], int numrays)
             rays[i] = perpWallDist;
 
             // Draw ray from player to hit point
-        if (keys[SDL_SCANCODE_SPACE]) {
+        if (true) {
             float centerX = playerX * mapSize + mapSize / 4;
             float centerY = playerY * mapSize + mapSize / 4;
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
@@ -253,7 +253,7 @@ void drawMiniMap()
 }
 void renderWalls(float rays[])
 {
-    float darkness = 1.6;
+    float darkness = 4;
     for (int i = 0; i < WINDOW_WIDTH;i++)
     {
         // for each ray render a line from the center that is bigger the smaller the ray is
@@ -359,7 +359,8 @@ SDL_FRect firstbgRect = {0,0,WINDOW_WIDTH,WINDOW_HEIGHT};
      {
          drawMiniMap();
          drawPlayer(p.xPos,p.yPos,p.deltaX,p.deltaY);
-         SDL_RenderDebugText(renderer,(WINDOW_WIDTH/2)-mapSize,WINDOW_HEIGHT-mapSize,"DEBUGGING SCREEN");
+         drawRays(p.xPos,p.yPos,rays,numrays);
+         SDL_RenderDebugText(renderer,(WINDOW_WIDTH/2)-mapSize,WINDOW_HEIGHT-mapSize,"DEBUG");
      }
  
      SDL_RenderPresent(renderer);  /* put it all on the screen! */
