@@ -2,3 +2,5 @@ src/*
 SDL3.dll
 Makefile
 main.exe
+.vscode
+.idea
