@@ -254,6 +254,13 @@ void drawMiniMap()
 void renderWalls(float rays[])
 {
     float darkness = 4;
+    float colorR = 200;
+    float colorG = 100;
+    float colorB = 100;
+    float finalColorR = colorR;
+    float finalColorG = colorR;
+    float finalColorB = colorR;
+
     for (int i = 0; i < WINDOW_WIDTH;i++)
     {
         // for each ray render a line from the center that is bigger the smaller the ray is
@@ -263,14 +270,14 @@ void renderWalls(float rays[])
         int endy = WINDOW_HEIGHT/2 + (lineheight/2);
 
         //draw above the line a different color
-        SDL_SetRenderDrawColor(renderer, 100,0,100, SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(renderer, 135,206,235, SDL_ALPHA_OPAQUE);
         SDL_RenderLine(renderer,i,0,i,starty);
         //draw the actual line a different color (can change based on what number the walls are)
         // draw darker based on distance
-        SDL_SetRenderDrawColor(renderer, 100-rays[i]*darkness,100-rays[i]*darkness,100-rays[i]*darkness, SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(renderer, 200-rays[i]*darkness,100-rays[i]*darkness,100-rays[i]*darkness, SDL_ALPHA_OPAQUE);
         SDL_RenderLine(renderer,i,starty,i,endy);
         //draw below the line a different color
-        SDL_SetRenderDrawColor(renderer, 50,0,50, SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(renderer, 124,252,0, SDL_ALPHA_OPAQUE);
         SDL_RenderLine(renderer,i,endy,i,WINDOW_HEIGHT);
     }
 }
@@ -338,8 +345,8 @@ SDL_FRect firstbgRect = {0,0,WINDOW_WIDTH,WINDOW_HEIGHT};
      // movement logic
      if (keys[SDL_SCANCODE_W]) {p.yPos += p.deltaY * MOVESPEED * deltaTime; p.xPos += p.deltaX * MOVESPEED * deltaTime;}
     if (keys[SDL_SCANCODE_S]) {p.yPos -= p.deltaY * MOVESPEED * deltaTime; p.xPos -= p.deltaX * MOVESPEED * deltaTime;}
-    if (keys[SDL_SCANCODE_A]) p.angle -= 0.001; if(p.angle < 0 ) {p.angle +=2*PI;};  // Turn Left
-    if (keys[SDL_SCANCODE_D]) p.angle += 0.001; if(p.angle>2*PI) {p.angle -=2*PI;};  // Turn Right
+    if (keys[SDL_SCANCODE_A]) p.angle -= 0.002; if(p.angle < 0 ) {p.angle +=2*PI;};  // Turn Left
+    if (keys[SDL_SCANCODE_D]) p.angle += 0.002; if(p.angle>2*PI) {p.angle -=2*PI;};  // Turn Right
 
      //collisions
      checkCollisions(p.xPos,p.yPos,p.deltaX,p.deltaY);
